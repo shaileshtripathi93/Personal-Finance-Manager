@@ -1,5 +1,5 @@
 # Personal Finance Manager
-![]()
+![](https://github.com/shaileshtripathi93/Personal-Finance-Manager/blob/main/Screenshot%202024-11-04%20152040.png)
 A simple web application to help you manage your personal finances. This tool allows you to track your income and expenses, view your current balance, and maintain a transaction history.
 
 ## Features
