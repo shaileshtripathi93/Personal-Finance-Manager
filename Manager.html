@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Finance Manager</title>
+    <style>body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 20px;
+    }
+    
+    .container {
+        max-width: 600px;
+        margin: auto;
+        background: white;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    
+    h1, h2, h3 {
+        text-align: center;
+    }
+    
+    .form-container {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+    }
+    
+    input[type="text"], input[type="number"] {
+        width: 30%;
+        padding: 10px;
+        margin-right: 10px;
+    }
+    
+    select {
+        padding: 10px;
+        margin-right: 10px;
+    }
+    
+    button {
+        padding: 10px 20px;
+        background-color: #28a745;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    
+    button:hover {
+        background-color: #218838;
+    }
+    
+    #transactionList {
+        list-style-type: none;
+        padding: 0;
+    }
+    
+    #transactionList li {
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+    }
+    </style></head>
+<body>
+    <div class="container">
+        <h1>Personal Finance Manager</h1>
+        <div class="form-container">
+            <input type="text" id="description" placeholder="Description">
+            <input type="number" id="amount" placeholder="Amount">
+            <select id="type">
+                <option value="income">Income</option>
+                <option value="expense">Expense</option>
+            </select>
+            <button id="addTransactionButton">Add Transaction</button>
+        </div>
+        <h2>Balance: <span id="balance">0</span></h2>
+        <h3>Transaction History</h3>
+        <ul id="transactionList"></ul>
+    </div>
+    <script>
+        let balance = 0;
+const transactionList = document.getElementById('transactionList');
+const balanceDisplay = document.getElementById('balance');
+
+document.getElementById('addTransactionButton').addEventListener('click', addTransaction);
+
+function addTransaction() {
+    const description = document.getElementById('description').value;
+    const amount = parseFloat(document.getElementById('amount').value);
+    const type = document.getElementById('type').value;
+
+    if (!description || isNaN(amount) || amount <= 0) {
+        alert('Please enter valid description and amount.');
+        return;
+    }
+
+    if (type === 'income') {
+        balance += amount;
+    } else {
+        balance -= amount;
+    }
+
+    updateBalance();
+    addTransactionToHistory(description, amount, type);
+    clearInputs();
+}
+
+function updateBalance() {
+    balanceDisplay.innerText = balance.toFixed(2);
+}
+
+function addTransactionToHistory(description, amount, type) {
+    const li = document.createElement('li');
+    li.innerText = `${description}: $${amount.toFixed(2)} (${type})`;
+    transactionList.appendChild(li);
+}
+
+function clearInputs() {
+    document.getElementById('description').value = '';
+    document.getElementById('amount').value = '';
+    document.getElementById('type').value = 'income';
+}
+
+    </script>
+</body>
+</html>
